@@ -16,6 +16,12 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->string('title', 250);
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->boolean('anonymous_comments');
+            $table->longText('content');
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 
